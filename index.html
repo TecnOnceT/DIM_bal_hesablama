@@ -241,7 +241,6 @@
 </div>
 
 <script>
-// Qruplara görə fənlərin və əmsalların rəsmi konfiqurasiyası
 const qrupMəlumatları = {
     "1": { f1: "Riyaziyyat (Əmsal: 1.5)", f2: "Fizika (Əmsal: 1.5)", f3: "İnformatika/Kimya (Əmsal: 1.0)", emsal1: 1.5, emsal2: 1.5, emsal3: 1.0 },
     "2": { f1: "Riyaziyyat (Əmsal: 1.5)", f2: "Coğrafiya (Əmsal: 1.5)", f3: "Tarix (Əmsal: 1.0)", emsal1: 1.5, emsal2: 1.5, emsal3: 1.0 },
@@ -255,14 +254,12 @@ function qrupDeyis() {
     document.getElementById("name-f2").innerText = qrupMəlumatları[qrup].f2;
     document.getElementById("name-f3").innerText = qrupMəlumatları[qrup].f3;
     
-    // Qrup dəyişəndə köhnə balları sıfırla
     document.getElementById("bal-f1").innerText = "0.0 Bal";
     document.getElementById("bal-f2").innerText = "0.0 Bal";
     document.getElementById("bal-f3").innerText = "0.0 Bal";
     document.getElementById("global-total").innerText = "Ümumi Toplanmış Bal: 0.0";
 }
 
-// Klaviaturadan yazılan dəyərləri anında qoruyan funksiya
 function limitYoxla(input, max) {
     if (input.value === "") return;
     let val = parseFloat(input.value);
@@ -270,7 +267,6 @@ function limitYoxla(input, max) {
     if (val < 0) input.value = 0;
 }
 
-// Qapalı sualların ümumi cəminin 22-ni keçməməsi qorunması
 function qapaliCemYoxla(fennId) {
     let qdInput = document.getElementById('qd-' + fennId);
     let qsInput = document.getElementById('qs-' + fennId);
@@ -282,7 +278,6 @@ function qapaliCemYoxla(fennId) {
     }
 }
 
-// Nisbi bal hesablama funksiyası
 function hesablaFenn(qd, qs, ad, yi) {
     let netice = (qd - (qs * 0.25) + ad + (2 * yi)) * 100 / 33;
     if (netice < 0) netice = 0;
@@ -293,7 +288,6 @@ function hesabla() {
     let qrup = document.getElementById("group-select").value;
     let konfiq = qrupMəlumatları[qrup];
 
-    // Fənn 1
     let qdf1 = parseFloat(document.getElementById('qd-f1').value) || 0;
     let qsf1 = parseFloat(document.getElementById('qs-f1').value) || 0;
     let adf1 = parseFloat(document.getElementById('ad-f1').value) || 0;
@@ -301,7 +295,6 @@ function hesabla() {
     let balF1 = hesablaFenn(qdf1, qsf1, adf1, yif1);
     document.getElementById('bal-f1').innerText = balF1 + " Bal";
 
-    // Fənn 2
     let qdf2 = parseFloat(document.getElementById('qd-f2').value) || 0;
     let qsf2 = parseFloat(document.getElementById('qs-f2').value) || 0;
     let adf2 = parseFloat(document.getElementById('ad-f2').value) || 0;
@@ -309,7 +302,6 @@ function hesabla() {
     let balF2 = hesablaFenn(qdf2, qsf2, adf2, yif2);
     document.getElementById('bal-f2').innerText = balF2 + " Bal";
 
-    // Fənn 3
     let qdf3 = parseFloat(document.getElementById('qd-f3').value) || 0;
     let qsf3 = parseFloat(document.getElementById('qs-f3').value) || 0;
     let adf3 = parseFloat(document.getElementById('ad-f3').value) || 0;
@@ -317,7 +309,6 @@ function hesabla() {
     let balF3 = hesablaFenn(qdf3, qsf3, adf3, yif3);
     document.getElementById('bal-f3').innerText = balF3 + " Bal";
 
-    // Rəsmi əmsallara vurulma düsturu
     let umumiBal = (balF1 * konfiq.emsal1) + (balF2 * konfiq.emsal2) + (balF3 * konfiq.emsal3);
     document.getElementById('global-total').innerText = "Ümumi Toplanmış Bal: " + Math.round(umumiBal * 10) / 10;
 }
