@@ -57,14 +57,6 @@
             gap: 15px;
         }
 
-        .info-item {
-            font-size: 15px;
-        }
-
-        .info-item strong {
-            color: var(--primary-color);
-        }
-
         .total-score {
             grid-column: 1 / -1;
             background: #e8f4fd;
@@ -172,7 +164,6 @@
     </header>
 
     <div class="student-info">
-
         <div class="total-score" id="global-total">Ümumi Toplanmış Bal: 0.0</div>
     </div>
 
@@ -183,10 +174,10 @@
                 <span class="nisbi-bal" id="bal-riyaziyyat">0.0 Bal</span>
             </div>
             <div class="card-body">
-                <div class="input-group"><label>Qapalı Düzgün:</label><input type="number" id="qd-riy" value="0" min="0" max="22"></div>
-                <div class="input-group"><label>Qapalı Səhv:</label><input type="number" id="qs-riy" value="0" min="0" max="22"></div>
-                <div class="input-group"><label>Açıq Düzgün:</label><input type="number" id="ad-riy" value="0" min="0" max="5"></div>
-                <div class="input-group"><label>Yazı İşləri (Maks 3):</label><input type="number" id="yi-riy" value="0" min="0" max="3" step="0.5"></div>
+                <div class="input-group"><label>Qapalı Düzgün:</label><input type="number" id="qd-riy" value="0" min="0" max="22" oninput="limitYoxla(this, 22)"></div>
+                <div class="input-group"><label>Qapalı Səhv:</label><input type="number" id="qs-riy" value="0" min="0" max="22" oninput="limitYoxla(this, 22)"></div>
+                <div class="input-group"><label>Açıq Düzgün:</label><input type="number" id="ad-riy" value="0" min="0" max="5" oninput="limitYoxla(this, 5)"></div>
+                <div class="input-group"><label>Yazı İşləri (Maks 3):</label><input type="number" id="yi-riy" value="0" min="0" max="3" step="0.5" oninput="limitYoxla(this, 3)"></div>
             </div>
         </div>
 
@@ -196,10 +187,10 @@
                 <span class="nisbi-bal" style="background:#e67e22;" id="bal-fizika">0.0 Bal</span>
             </div>
             <div class="card-body">
-                <div class="input-group"><label>Qapalı Düzgün:</label><input type="number" id="qd-fiz" value="0" min="0" max="22"></div>
-                <div class="input-group"><label>Qapalı Səhv:</label><input type="number" id="qs-fiz" value="0" min="0" max="22"></div>
-                <div class="input-group"><label>Açıq Düzgün:</label><input type="number" id="ad-fiz" value="0" min="0" max="5"></div>
-                <div class="input-group"><label>Yazı İşləri (Maks 3):</label><input type="number" id="yi-fiz" value="0" min="0" max="3" step="0.5"></div>
+                <div class="input-group"><label>Qapalı Düzgün:</label><input type="number" id="qd-fiz" value="0" min="0" max="22" oninput="limitYoxla(this, 22)"></div>
+                <div class="input-group"><label>Qapalı Səhv:</label><input type="number" id="qs-fiz" value="0" min="0" max="22" oninput="limitYoxla(this, 22)"></div>
+                <div class="input-group"><label>Açıq Düzgün:</label><input type="number" id="ad-fiz" value="0" min="0" max="5" oninput="limitYoxla(this, 5)"></div>
+                <div class="input-group"><label>Yazı İşləri (Maks 3):</label><input type="number" id="yi-fiz" value="0" min="0" max="3" step="0.5" oninput="limitYoxla(this, 3)"></div>
             </div>
         </div>
 
@@ -209,10 +200,10 @@
                 <span class="nisbi-bal" style="background:#2ecc71;" id="bal-informatika">0.0 Bal</span>
             </div>
             <div class="card-body">
-                <div class="input-group"><label>Qapalı Düzgün:</label><input type="number" id="qd-inf" value="0" min="0" max="22"></div>
-                <div class="input-group"><label>Qapalı Səhv:</label><input type="number" id="qs-inf" value="0" min="0" max="22"></div>
-                <div class="input-group"><label>Açıq Düzgün:</label><input type="number" id="ad-inf" value="0" min="0" max="5"></div>
-                <div class="input-group"><label>Yazı İşləri (Maks 3):</label><input type="number" id="yi-inf" value="0" min="0" max="3" step="0.5"></div>
+                <div class="input-group"><label>Qapalı Düzgün:</label><input type="number" id="qd-inf" value="0" min="0" max="22" oninput="limitYoxla(this, 22)"></div>
+                <div class="input-group"><label>Qapalı Səhv:</label><input type="number" id="qs-inf" value="0" min="0" max="22" oninput="limitYoxla(this, 22)"></div>
+                <div class="input-group"><label>Açıq Düzgün:</label><input type="number" id="ad-inf" value="0" min="0" max="5" oninput="limitYoxla(this, 5)"></div>
+                <div class="input-group"><label>Yazı İşləri (Maks 3):</label><input type="number" id="yi-inf" value="0" min="0" max="3" step="0.5" oninput="limitYoxla(this, 3)"></div>
             </div>
         </div>
     </div>
@@ -225,6 +216,17 @@
 </div>
 
 <script>
+// İstifadəçi klaviaturadan yazanda limiti keçməməsi üçün funksiya
+function limitYoxla(input, max) {
+    let val = parseFloat(input.value);
+    if (val > max) {
+        input.value = max;
+    }
+    if (val < 0 || isNaN(val)) {
+        input.value = 0;
+    }
+}
+
 function hesablaFenn(qd, qs, ad, yi) {
     let netice = (qd - (qs * 0.25) + ad + (2 * yi)) * 100 / 33;
     if (netice < 0) netice = 0;
